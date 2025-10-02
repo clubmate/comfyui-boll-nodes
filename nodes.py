@@ -55,8 +55,8 @@ class WANConfig:
             }
         }
 
-    RETURN_TYPES = ("INT", "INT", "INT", "FLOAT", "FLOAT", "INT")
-    RETURN_NAMES = ("width", "height", "steps", "model_float", "cfg", "video_length")
+    RETURN_TYPES = ("INT", "INT", "INT", "INT", "FLOAT", "FLOAT")
+    RETURN_NAMES = ("width", "height", "video_length", "steps", "model_float", "cfg")
     FUNCTION = "execute"
 
     def execute(self, resolution, video_length, steps, model_float, cfg):
