@@ -20,7 +20,7 @@ class GetLastImage:
         last_image = images[-1].unsqueeze(0)
         return (last_image,)
 
-class DeleteLastImage:
+class RemoveLastImage:
     CATEGORY = "image/batch"
 
     @classmethod
@@ -39,3 +39,32 @@ class DeleteLastImage:
         # Remove the last image from the batch
         remaining_images = images[:-1]
         return (remaining_images,)
+
+class WANConfig:
+    CATEGORY = "config"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "resolution": (["480p", "720p", "1080p"], {"default": "480p"}),
+                "steps": ("INT", {"default": 20, "min": 1, "max": 100}),
+                "model_float": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0}),
+                "cfg": ("FLOAT", {"default": 7.0, "min": 1.0, "max": 20.0}),
+            }
+        }
+
+    RETURN_TYPES = ("INT", "INT", "INT", "FLOAT", "FLOAT")
+    RETURN_NAMES = ("width", "height", "steps", "model_float", "cfg")
+    FUNCTION = "execute"
+
+    def execute(self, resolution, steps, model_float, cfg):
+        if resolution == "480p":
+            width, height = 854, 480
+        elif resolution == "720p":
+            width, height = 1280, 720
+        elif resolution == "1080p":
+            width, height = 1920, 1080
+        else:
+            width, height = 1280, 720  # Fallback
+        return (width, height, steps, model_float, cfg)
