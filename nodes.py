@@ -68,4 +68,4 @@ class WANConfig:
             width, height = 1920, 1080
         else:
             width, height = 1280, 720  # Fallback
-        return (width, height, steps, model_float, cfg, video_length)
+        return (width, height, video_length, steps, model_float, cfg)
