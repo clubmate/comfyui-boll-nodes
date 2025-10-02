@@ -49,16 +49,17 @@ class WANConfig:
             "required": {
                 "resolution": (["480p", "720p", "1080p"], {"default": "480p"}),
                 "steps": ("INT", {"default": 20, "min": 1, "max": 100}),
-                "model_float": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0}),
-                "cfg": ("FLOAT", {"default": 7.0, "min": 1.0, "max": 20.0}),
+                "model_float": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 10.0}),
+                "cfg": ("FLOAT", {"default": 3.5, "min": 1.0, "max": 20.0}),
+                "video_length": ("INT", {"default": 81, "min": 1, "max": 81}),
             }
         }
 
-    RETURN_TYPES = ("INT", "INT", "INT", "FLOAT", "FLOAT")
-    RETURN_NAMES = ("width", "height", "steps", "model_float", "cfg")
+    RETURN_TYPES = ("INT", "INT", "INT", "FLOAT", "FLOAT", "INT")
+    RETURN_NAMES = ("width", "height", "steps", "model_float", "cfg", "video_length")
     FUNCTION = "execute"
 
-    def execute(self, resolution, steps, model_float, cfg):
+    def execute(self, resolution, steps, model_float, cfg, video_length):
         if resolution == "480p":
             width, height = 854, 480
         elif resolution == "720p":
@@ -67,4 +68,4 @@ class WANConfig:
             width, height = 1920, 1080
         else:
             width, height = 1280, 720  # Fallback
-        return (width, height, steps, model_float, cfg)
+        return (width, height, steps, model_float, cfg, video_length)
