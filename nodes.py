@@ -48,10 +48,10 @@ class WANConfig:
         return {
             "required": {
                 "resolution": (["480p", "720p", "1080p"], {"default": "480p"}),
+                "video_length": ("INT", {"default": 81, "min": 1, "max": 81}),
                 "steps": ("INT", {"default": 20, "min": 1, "max": 100}),
                 "model_float": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 10.0}),
                 "cfg": ("FLOAT", {"default": 3.5, "min": 1.0, "max": 20.0}),
-                "video_length": ("INT", {"default": 81, "min": 1, "max": 81}),
             }
         }
 
@@ -59,7 +59,7 @@ class WANConfig:
     RETURN_NAMES = ("width", "height", "steps", "model_float", "cfg", "video_length")
     FUNCTION = "execute"
 
-    def execute(self, resolution, steps, model_float, cfg, video_length):
+    def execute(self, resolution, video_length, steps, model_float, cfg):
         if resolution == "480p":
             width, height = 854, 480
         elif resolution == "720p":
